@@ -16,11 +16,12 @@
 
     <div class="bg-amarillo contenedor sombra">
         
-        <form action="#" id="contacto">
+        <form id="contacto" action="#">
 
             <legend>Edite el Contacto <span>Todos los campos son obligatorios</span></legend>
 
-    
+            <?php include "includes/layout/formulario.php"; ?>
+
         </form>
 
     </div>
