@@ -31,12 +31,13 @@ function leerFormulario(e){
             // Crearemos un nuevo Contacto
             isertarDB(infoContacto);
         } else {
-            // Editarrmos el Contacto
+            // Editaremos el Contacto
         }
     }
 }
 
 // Inserta en la base de datos via Ajax
+
 function isertarDB(datos){
     // Llamado a Ajax
 
@@ -47,7 +48,6 @@ function isertarDB(datos){
     // Pasar datos
     xhr.onload = function(){
         if(this.status === 200){
-            console.log(JSON.parse(xhr.responseText));
             // Leemos la respuesta de PHP
             const respuesta = JSON.parse(xhr.responseText);
             console.log(respuesta.empresa);
