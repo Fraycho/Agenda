@@ -3,7 +3,7 @@
 
     // Credenciales de la base de datos
     define('DB_USUARIO', 'root');
-    define('DB_CONTRASEÑA', 'root');
+    define('DB_CONTRASEÑA', 'mysql');
     define('DB_HOST', 'localhost');
     define('DB_NOMBRE', 'agendaphp');
 
