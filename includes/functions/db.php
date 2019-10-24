@@ -10,5 +10,3 @@
     $conexion = new mysqli(DB_HOST, DB_USUARIO, DB_CONTRASEÑA, DB_NOMBRE);
 
     echo $conexion->ping();
-
-?>

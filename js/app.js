@@ -27,11 +27,16 @@ function leerFormulario(e){
         infoContacto.append('telefono', telefono);
         infoContacto.append('accion', accion);
 
+        console.log(...infoContacto);
+
         if(accion === 'crear'){
             // Crearemos un nuevo Contacto
-            isertarDB(infoContacto);
+            //isertarDB(infoContacto);
+            console.log("Contacto creado");
         } else {
             // Editaremos el Contacto
+
+            console.log("Contacto Editado");
         }
     }
 }
@@ -49,10 +54,9 @@ function isertarDB(datos){
     xhr.onload = function(){
         if(this.status === 200){
             // Leemos la respuesta de PHP
-            const respuesta = JSON.parse(xhr.responseText);
-            console.log(respuesta.empresa);
+            console.log(JSON.parse( xhr.responseText));
         }
-    }
+    };
     // Enviar datos
     xhr.send(datos);
 }
