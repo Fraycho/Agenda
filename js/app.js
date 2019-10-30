@@ -56,7 +56,7 @@ function isertarDB(datos){
             // Leemos la respuesta de PHP
             console.log(xhr.responseText);
         }
-    };
+    }
     // Enviar datos
     xhr.send(datos);
 }
