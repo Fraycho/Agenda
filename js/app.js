@@ -54,7 +54,7 @@ function isertarDB(datos){
     xhr.onload = function(){
         if(this.status === 200){
             // Leemos la respuesta de PHP
-            console.log(JSON.parse( xhr.responseText));
+            console.log(xhr.responseText);
         }
     };
     // Enviar datos
