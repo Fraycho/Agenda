@@ -1,6 +1,9 @@
 <?php 
 
-    /* if($_POST['accion'] == 'crear'){
+    
+    // echo json_encode($_POST);
+
+    if($_POST['accion'] == 'crear'){
 
         // Crea nuevo registro en la base de datos
 
@@ -16,17 +19,25 @@
             $stmt = $conexion->prepare("INSERT INTO contactos (nombre, empresa, telefono) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $nombre, $empresa, $telefono);
             $stmt->execute();
-            $respuesta = array(
+            if($stmt->affected_rows == 1){
+                $respuesta = array(
                 'respuesta' => 'correcto',
-                'info' => $stmt->affected_rows
-            );
+                'datos' => array(
+                    'nombre' => $nombre,
+                    'empresa' => $empresa,
+                    'telefono' => $telefono,
+                    'id_insertado' => $stmt->insert_id
+                    )
+                );
+            }
+            
             $stmt->close();
             $conexion->close();
         } catch(Exception $e) {
             $respuesta = array(
                 'error' => $e->getMessage()
             );
-        } */
+        }
 
-        echo json_encode($_POST);
-
+        echo json_encode($respuesta);
+    }

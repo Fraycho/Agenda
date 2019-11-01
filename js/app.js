@@ -31,7 +31,7 @@ function leerFormulario(e){
 
         if(accion === 'crear'){
             // Crearemos un nuevo Contacto
-            //isertarDB(infoContacto);
+            isertarDB(infoContacto);
             console.log("Contacto creado");
         } else {
             // Editaremos el Contacto
@@ -54,7 +54,8 @@ function isertarDB(datos){
     xhr.onload = function(){
         if(this.status === 200){
             // Leemos la respuesta de PHP
-            console.log(xhr.responseText);
+            const respuesta = JSON.parse(xhr.responseText);          
+            console.log(respuesta);
         }
     }
     // Enviar datos
