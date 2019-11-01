@@ -1,5 +1,8 @@
 
-<?php include "includes/layout/header.php"; ?>
+<?php
+    include "includes/functions/funciones.php";
+    include "includes/layout/header.php";
+?>
 
     <div class="contenedor-barra">
 
@@ -35,7 +38,7 @@
 
             <div class="contenedor-tabla">
 
-                <table id="listado" class="listado-contactos">
+                <table id="listado-contactos" class="listado-contactos">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -47,24 +50,11 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>Fray</td>
-                            <td>Visual-Fymez</td>
-                            <td>034 450 1450</td>
-                            <td>
-                                <a class="btn btn-editar" href="editar.php?id=1"><i class="fas fa-pen-square"></i></a>
-                                <button data-id="1" type="button" class="btn btn-borrar"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Fray</td>
-                            <td>Visual-Fymez</td>
-                            <td>034 450 1450</td>
-                            <td>
-                                <a class="btn btn-editar" href="editar.php?id=1"><i class="fas fa-pen-square"></i></a>
-                                <button data-id="1" type="button" class="btn btn-borrar"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                        <?php 
+                            $contactos = obtenerContactos();
+
+                            var_dump($contactos);
+                        ?>
                         <tr>
                             <td>Fray</td>
                             <td>Visual-Fymez</td>
