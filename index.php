@@ -50,22 +50,27 @@
 
                     <tbody>
 
-                        <?php 
-                            $contactos = obtenerContactos();
+                        <?php $contactos = obtenerContactos();
 
-                            var_dump($contactos);
-                        ?>
-                        <tr>
-                            <td>Fray</td>
-                            <td>Visual-Fymez</td>
-                            <td>034 450 1450</td>
-                            <td>
-                                <a class="btn btn-editar" href="editar.php?id=1"><i class="fas fa-pen-square"></i></a>
-                                <button data-id="1" type="button" class="btn btn-borrar"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                        if($contactos->num_rows):
+                            foreach($contactos as $contacto): ?>
+            
+                                <tr>
+                                    <td><?php echo $contacto['nombre']; ?></td>
+                                    <td><?php echo $contacto['empresa']; ?></td>
+                                    <td><?php echo $contacto['telefono']; ?></td>
+                                    <td>
+                                        <a class="btn btn-editar" href="editar.php?id=<?php echo $contacto['id']; ?>"><i class="fas fa-pen-square"></i></a>
+                                        <button data-id="<?php echo $contacto['id']; ?>" type="button" class="btn btn-borrar"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+
+                        <?php endforeach;
+                        endif; ?>
+
                     
                     </tbody>
+                    
                 </table>
             </div> <!-- Tabla -->
 
