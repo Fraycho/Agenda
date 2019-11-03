@@ -139,6 +139,15 @@ function eliminarContacto(e){
             xhr.onload = function(){
                 if(this.status === 200){
                     const resultado = JSON.parse(xhr.responseText);
+                    if(resultado.respuesta === 'correcto'){
+                        //Eliminar registro del DOM
+
+                        // Notificacion
+                        mostrarNotificacion('Contacto Eliminado', 'correcto');
+                    } else {
+                        // Notificacion
+                        mostrarNotificacion('Hubo un error...', 'error');
+                    }
                     console.log(resultado);
                 }
             }
