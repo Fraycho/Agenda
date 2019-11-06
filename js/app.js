@@ -141,6 +141,8 @@ function eliminarContacto(e){
                     const resultado = JSON.parse(xhr.responseText);
                     if(resultado.respuesta === 'correcto'){
                         //Eliminar registro del DOM
+                        console.log(e.target.parentElement.parentElement.parentElement);
+                        e.target.parentElement.parentElement.parentElement.remove();
 
                         // Notificacion
                         mostrarNotificacion('Contacto Eliminado', 'correcto');
