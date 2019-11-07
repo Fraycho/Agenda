@@ -9,10 +9,14 @@ function eventos(){
     formularioContactos.addEventListener('submit', leerFormulario);
 
     // Boton eliminar
-    listadoContactos.addEventListener('click', eliminarContacto)
+    if(listadoContactos){
+        listadoContactos.addEventListener('click', eliminarContacto)
+    }
+    
 }
 
 function leerFormulario(e){
+    e.preventDefault();
     
     // Leer datos de los inputs
     const nombre = document.querySelector('#nombre').value,
@@ -31,16 +35,19 @@ function leerFormulario(e){
         infoContacto.append('telefono', telefono);
         infoContacto.append('accion', accion);
 
-        console.log(...infoContacto);
-
         if(accion === 'crear'){
             // Crearemos un nuevo Contacto
             isertarDB(infoContacto);
             console.log("Contacto creado");
+            console.log(...infoContacto);
         } else {
             // Editaremos el Contacto
-
+            // Leer id
+            const idRegistro = document.querySelector('#id').value;
+            infoContacto.append('id', idRegistro);
             console.log("Contacto Editado");
+
+            editarContacto(infoContacto);
         }
     }
 }
@@ -114,6 +121,41 @@ function isertarDB(datos){
     }
     // Enviar datos
     xhr.send(datos);
+}
+
+
+// Editar contacto
+
+function editarContacto(datos){
+    // Crear el objeto
+    const xhr = new XMLHttpRequest();
+
+    // Abrir la conexion
+    xhr.open('POST', 'includes/models/modelo-contactos.php', true);
+
+    // Leer la respuesta
+    xhr.onload = function(){
+        if(this.status === 200){
+            const resultado = JSON.parse(xhr.responseText);
+            console.log(resultado);
+            if(resultado.respuesta === "correcto"){
+                // Notificacion de contacto editado
+                mostrarNotificacion("Contacto Editado correctamente", "correcto");
+            } else {
+                mostrarNotificacion("Hubo un error", "error");
+            }
+            
+            // Despues de 3 segundo redireccionamos
+            setTimeout(() => {
+                window.location.href = "index.php";
+            }, 4000);
+        }
+    }
+
+    // Enviar peticion
+    xhr.send(datos);
+    
+    console.log(...datos);
 }
 
 

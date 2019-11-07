@@ -13,34 +13,30 @@
     $resultado = obtenerContacto($id);
     $contacto = $resultado->fetch_assoc();
 ?>
-    <pre>
-        <?php var_dump($contacto); ?>
-    </pre>
 
-    <div class="contenedor-barra">
 
-        <div class="contenedor barra">
+<div class="contenedor-barra">
 
-            <a href="index.php" class="btn volver">Volver</a>
-            <h1>Editar Contacto</h1>
+    <div class="contenedor barra">
 
-        </div>
+        <a href="index.php" class="btn volver">Volver</a>
+        <h1>Editar Contacto</h1>
 
     </div>
 
+</div>
 
+<div class="bg-amarillo contenedor sombra">
+    
+    <form id="contacto" action="#">
 
-    <div class="bg-amarillo contenedor sombra">
-        
-        <form id="contacto" action="#">
+        <legend>Edite el Contacto <span>Todos los campos son obligatorios</span></legend>
 
-            <legend>Edite el Contacto <span>Todos los campos son obligatorios</span></legend>
+        <?php include "includes/layout/formulario.php"; ?>
 
-            <?php include "includes/layout/formulario.php"; ?>
+    </form>
 
-        </form>
-
-    </div>
+</div>
 
 
 <?php include "includes/layout/footer.php"; ?>
