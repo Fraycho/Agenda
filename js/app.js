@@ -1,6 +1,7 @@
 
-const formularioContactos = document.querySelector('#contacto');
-const listadoContactos = document.querySelector('#listado-contactos tbody');
+    const formularioContactos = document.querySelector('#contacto');
+    const listadoContactos = document.querySelector('#listado-contactos tbody');
+    const inputBuscador = document.querySelector('#buscar');
 
 eventos();
 
@@ -10,11 +11,16 @@ function eventos(){
 
     // Boton eliminar
     if(listadoContactos){
-        listadoContactos.addEventListener('click', eliminarContacto)
+        listadoContactos.addEventListener('click', eliminarContacto);
     }
-    
+
+    // Buscador
+    inputBuscador.addEventListener('input', buscarContactos);
+
+    numeroContactos();
 }
 
+// Leer datos del formulario
 function leerFormulario(e){
     e.preventDefault();
     
@@ -54,7 +60,6 @@ function leerFormulario(e){
 
 
 // Inserta en la base de datos via Ajax
-
 function isertarDB(datos){
     // Llamado a Ajax
 
@@ -117,6 +122,9 @@ function isertarDB(datos){
             // Notificacion
             mostrarNotificacion('Contacto creado correctamente', 'correcto');
 
+            // Mostrar Numero contactos
+            numeroContactos()
+
         }
     }
     // Enviar datos
@@ -125,7 +133,6 @@ function isertarDB(datos){
 
 
 // Editar contacto
-
 function editarContacto(datos){
     // Crear el objeto
     const xhr = new XMLHttpRequest();
@@ -160,7 +167,6 @@ function editarContacto(datos){
 
 
 // Eliminar contacto
-
 function eliminarContacto(e){
     if( e.target.parentElement.classList.contains('btn-borrar') ){
         //Tomar el id
@@ -188,6 +194,8 @@ function eliminarContacto(e){
 
                         // Notificacion
                         mostrarNotificacion('Contacto Eliminado', 'correcto');
+                        // Mostrar Numero contactos
+                        numeroContactos()
                     } else {
                         // Notificacion
                         mostrarNotificacion('Hubo un error...', 'error');
@@ -205,7 +213,6 @@ function eliminarContacto(e){
 
 
 // Notificacion en Pantalla
-
 function mostrarNotificacion(mensaje, clase){
     const notificacion = document.createElement('div');
     notificacion.classList.add(clase, 'notificacion', 'sombra');
@@ -227,3 +234,39 @@ function mostrarNotificacion(mensaje, clase){
     }, 100);
 
 }
+
+// Buscar contactos
+function buscarContactos(e){
+    const expresion = new RegExp(e.target.value, "i");
+    const registros = document.querySelectorAll('tbody tr');
+
+    registros.forEach(registro => {
+        registro.style.display = 'none';
+
+        //console.log(registro.childNodes[1].textContent.replace(/\s/g, " ").search(expresion) != -1);
+        if(registro.childNodes[1].textContent.replace(/\s/g, " ").search(expresion) != -1){
+            registro.style.display = 'table-row';
+        }
+        numeroContactos();
+    })
+}
+
+
+// Mostrar numero de contactos
+function numeroContactos(){
+    const totalContactos = document.querySelectorAll('tbody tr');
+    const contenedorNumero = document.querySelector('.total-contactos span');
+    
+    let total = 0;
+
+    totalContactos.forEach(contacto => {
+        if(contacto.style.display === '' || contacto.style.display === 'table-row'){
+            total++;
+        }
+    });
+
+    console.log(total);
+    contenedorNumero.textContent = total;
+}
+
+
